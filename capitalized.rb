@@ -1,7 +1,7 @@
-require "./decorator.rb"
+require './decorator'
 
-class Capitalized_Decorator < Decorator
-    def correct_name
-        @component.correct_name.capitalize
-    end
+class Capitalized < Decorator
+  def correct_name
+    @component.correct_name.capitalize
+  end
 end
