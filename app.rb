@@ -101,8 +101,6 @@ class App
     @rentals.each do |rental|
       if rental.person.id == person_id
         puts "Date: #{rental.date}, Book: #{rental.book.title}, Person: #{rental.person.name}"
-      else
-        puts 'User id not found'
       end
     end
   end
