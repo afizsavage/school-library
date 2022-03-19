@@ -7,6 +7,10 @@ class App
     @people = []
   end
 
+  def list_all_people
+    puts @people
+  end
+
   def create_person
     print 'Do you want to create a student(1) a teacher(2)? [Input tNhe number]:'
     option = gets.chomp
@@ -22,11 +26,11 @@ class App
       print 'Has parent permission? [Y/N]: '
       has_permission = gets.chomp
       parent_permission = has_permission.include? 'Yy'
-      classroom = "Room 1"
+      classroom = 'Room 1'
 
-      @people.push(Student.new(age, name, parent_permission))
+      puts 'New Student created successfully'
+      @people << Student.new(age, name, parent_permission)
 
-      puts 'New Teacher created successfully'
     when '2'
       puts 'create teacher'
     end
