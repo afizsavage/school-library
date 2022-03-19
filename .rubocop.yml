@@ -53,3 +53,5 @@ Style/OptionalBooleanParameter:
   Enabled: false
 Metrics/CyclomaticComplexity:
   Enabled: false
+Lint/MissingSuper:
+  Enabled: false
