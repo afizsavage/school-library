@@ -95,14 +95,14 @@ class App
   end
 
   def list_all_rentals
-    print "Enter person id "
+    print 'Enter person id '
     person_id = gets.chomp.to_i
 
     @rentals.each do |rental|
       if rental.person.id == person_id
         puts "Date: #{rental.date}, Book: #{rental.book.title}, Person: #{rental.person.name}"
       else
-        puts "User id not found"
+        puts 'User id not found'
       end
     end
   end
