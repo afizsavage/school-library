@@ -24,6 +24,8 @@ class MainEntryPoint
       @entry_point.create_person
     when '4'
       @entry_point.create_book
+    when '5'
+      @entry_point.create_rental
     when '7'
       exit
     end

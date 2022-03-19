@@ -13,7 +13,9 @@ class App
   end
 
   def list_all_people
-    puts @people
+    @people.each do |person|
+      puts "[#{person.class}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+    end
   end
 
   def create_person
@@ -60,5 +62,13 @@ class App
 
     @books << Book.new(title, author)
     puts "Book created sucessfully"
+  end
+
+  def create_rental
+    puts "Select a book from the following list by number"
+    @books.each_with_index do |book, index|
+      puts "(#{index}) - Title: #{book.title}, Author: #{book.author}"
+    end
+
   end
 end
