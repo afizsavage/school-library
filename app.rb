@@ -1,11 +1,13 @@
 require './student'
 require './teacher'
 require './book'
+require "./rental"
 
 class App
   def initialize
     @books = []
     @people = []
+    @rentals = []
   end
 
   def list_all_books
@@ -70,5 +72,25 @@ class App
       puts "(#{index}) - Title: #{book.title}, Author: #{book.author}"
     end
 
+    selected_book = gets.chomp
+    book_to_rent = @books.index(selected_book)
+
+    puts "Select a person from the following list by number (not id)"
+    @people.each_with_index do |person, index|
+      puts "[#{index}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+    end
+
+    selected_person = gets.chomp
+    person_who_rented  = @people.index(selected_person)
+
+    print "Date: "
+    date  = gets.chomp
+
+    @rentals << Rental.new(date, book_to_rent, person_who_rented)
+    puts "Rental created successfully"
+  end
+
+  def list_all_rentals
+    puts @rentals
   end
 end

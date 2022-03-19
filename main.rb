@@ -26,6 +26,8 @@ class MainEntryPoint
       @entry_point.create_book
     when '5'
       @entry_point.create_rental
+    when '6'
+      @entry_point.list_all_rentals
     when '7'
       exit
     end
