@@ -26,13 +26,23 @@ class App
       print 'Has parent permission? [Y/N]: '
       has_permission = gets.chomp
       parent_permission = has_permission.include? 'Yy'
-      classroom = 'Room 1'
 
-      puts 'New Student created successfully'
+      puts 'Person created successfully'
       @people << Student.new(age, name, parent_permission)
 
     when '2'
-      puts 'create teacher'
+      print 'Age '
+      age = gets.chomp
+
+      print 'Name '
+      name = gets.chomp
+
+      print 'Specialization '
+      specialization = gets.chomp
+
+      puts 'Person created successfully'
+      @people << Teacher.new(age, specialization, name)
+
     end
   end
 end

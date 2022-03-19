@@ -28,7 +28,7 @@ class MainEntryPoint
   def run
     user_input = nil
     puts 'Welcome to School Library App!'
-    
+
     while user_input != '7'
       user_options
       process_option
