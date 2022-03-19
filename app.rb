@@ -1,5 +1,6 @@
 require './student'
 require './teacher'
+require './book'
 
 class App
   def initialize
@@ -27,8 +28,8 @@ class App
       has_permission = gets.chomp
       parent_permission = has_permission.include? 'Yy'
 
-      puts 'Person created successfully'
       @people << Student.new(age, name, parent_permission)
+      puts 'Person created successfully'
 
     when '2'
       print 'Age '
@@ -40,9 +41,20 @@ class App
       print 'Specialization '
       specialization = gets.chomp
 
-      puts 'Person created successfully'
       @people << Teacher.new(age, specialization, name)
+      puts 'Person created successfully'
 
     end
+  end
+
+  def create_book
+    print "Title :"
+    title = gets.chomp
+    
+    print "Author :"
+    author = gets.chomp
+
+    @books << Book.new(title, author)
+    puts "Book created sucessfully"
   end
 end

@@ -20,6 +20,8 @@ class MainEntryPoint
       @entry_point.list_all_people
     when '3'
       @entry_point.create_person
+    when '4'
+      @entry_point.create_book
     when '7'
       exit
     end
