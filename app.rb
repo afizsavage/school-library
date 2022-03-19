@@ -1,7 +1,7 @@
 require './student'
 require './teacher'
 require './book'
-require "./rental"
+require './rental'
 
 class App
   def initialize
@@ -56,18 +56,18 @@ class App
   end
 
   def create_book
-    print "Title: "
+    print 'Title: '
     title = gets.chomp
-    
-    print "Author : "
+
+    print 'Author : '
     author = gets.chomp
 
     @books << Book.new(title, author)
-    puts "Book created sucessfully"
+    puts 'Book created sucessfully'
   end
 
   def create_rental
-    puts "Select a book from the following list by number"
+    puts 'Select a book from the following list by number'
     @books.each_with_index do |book, index|
       puts "(#{index}) - Title: #{book.title}, Author: #{book.author}"
     end
@@ -75,19 +75,19 @@ class App
     selected_book = gets.chomp
     book_to_rent = @books.index(selected_book)
 
-    puts "Select a person from the following list by number (not id)"
+    puts 'Select a person from the following list by number (not id)'
     @people.each_with_index do |person, index|
       puts "[#{index}] ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
     end
 
     selected_person = gets.chomp
-    person_who_rented  = @people.index(selected_person)
+    person_who_rented = @people.index(selected_person)
 
-    print "Date: "
-    date  = gets.chomp
+    print 'Date: '
+    date = gets.chomp
 
     @rentals << Rental.new(date, book_to_rent, person_who_rented)
-    puts "Rental created successfully"
+    puts 'Rental created successfully'
   end
 
   def list_all_rentals
