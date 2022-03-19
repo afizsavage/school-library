@@ -8,6 +8,10 @@ class App
     @people = []
   end
 
+  def list_all_books
+    puts @books
+  end
+
   def list_all_people
     puts @people
   end
@@ -48,10 +52,10 @@ class App
   end
 
   def create_book
-    print "Title :"
+    print "Title: "
     title = gets.chomp
     
-    print "Author :"
+    print "Author : "
     author = gets.chomp
 
     @books << Book.new(title, author)

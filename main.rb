@@ -16,6 +16,8 @@ class MainEntryPoint
   def process_option
     user_input = gets.chomp
     case user_input
+    when '1'
+      @entry_point.list_all_books
     when '2'
       @entry_point.list_all_people
     when '3'
