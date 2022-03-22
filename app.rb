@@ -2,6 +2,7 @@ require './teacher'
 require './book'
 require './rental'
 require './creator'
+require 'json'
 
 class App
   def initialize
@@ -79,6 +80,30 @@ class App
       if rental.person.id == person_id
         puts "Date: #{rental.date}, Book: #{rental.book.title}, Person: #{rental.person.name}"
       end
+    end
+  end
+
+  def preserve_data
+    tempHash = {"Group_Name" => "Kopo", "Group_Logo_Code" => "Who we are" }
+    arr = []
+    if File.file?('./books.json')
+      json = File.read('./books.json')
+    else
+      new_file = File.new("./books.json", "w")
+      new_file.puts(JSON.pretty_generate([]))
+      new_file.close
+      json = File.read('./books.json')
+    end
+
+    secondJsonArray = JSON.parse(json)
+
+    @books.each do |book|
+      secondJsonArray << {title: book.title, author: book.author}
+    end
+    
+
+    File.open("./books.json","w") do |f|
+      f.puts JSON.pretty_generate(secondJsonArray)
     end
   end
 end
