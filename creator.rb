@@ -1,4 +1,5 @@
 require './student.rb'
+require './teacher.rb'
 
 class PersonCreator
   def initialize(type)
@@ -22,6 +23,11 @@ class PersonCreator
       has_permission = gets.chomp
       parent_permission = has_permission.include? 'Yy'
       @person = Student.new(@age, @name, parent_permission)
+    else
+      print 'Specialization '
+      received_specialization = gets.chomp
+      specialization = received_specialization
+      @person = Teacher.new(@age, @name, specialization)
     end
   end
 

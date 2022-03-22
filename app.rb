@@ -20,16 +20,6 @@ class App
     end
   end
 
-  def create_teacher
-    teacher = @person.receive_input
-
-    print 'Specialization '
-    specialization = gets.chomp
-
-    @people << Teacher.new(teacher[:age], teacher[:name], specialization)
-    puts 'Person created successfully'
-  end
-
   def create_person
     print 'Do you want to create a student(1) a teacher(2)? [Input number]:'
     option = gets.chomp
@@ -39,7 +29,8 @@ class App
       student = PersonCreator.new('student')
       @people << student.create_person
     when '2'
-      create_teacher
+      teacher = PersonCreator.new('teacher')
+      @people << teacher.create_person
     else
       puts 'Wrong input!'
     end
