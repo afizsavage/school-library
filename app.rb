@@ -11,7 +11,9 @@ class App
   end
 
   def list_all_books
-    puts @books
+    @books.each do |book|
+      puts "Title: #{book.title}, Author: #{book.author}"
+    end
   end
 
   def list_all_people
