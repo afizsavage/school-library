@@ -22,7 +22,7 @@ class OptionProcesor
     when '7'
       exit
     else
-        puts "Wrong input! Enter a number 1 - 7."
+      puts 'Wrong input! Enter a number 1 - 7.'
     end
   end
 end
