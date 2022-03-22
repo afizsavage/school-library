@@ -1,5 +1,5 @@
-require './student.rb'
-require './teacher.rb'
+require './student'
+require './teacher'
 
 class PersonCreator
   def initialize(type)
