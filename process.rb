@@ -20,7 +20,7 @@ class OptionProcesor
     when '6'
       @entry_point.list_all_rentals
     when '7'
-      @entry_point.preserve_data
+      @entry_point.save_data
       exit
     else
       puts 'Wrong input! Enter a number 1 - 7.'
