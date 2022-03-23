@@ -6,15 +6,15 @@ class DataHandler
     @destructured_array = nil
   end
 
+  def create_file
+    new_file = File.new(@json_file, 'w')
+    new_file.puts(JSON.pretty_generate([]))
+    new_file.close
+  end
+
   def load_file_if_exists
-    if File.file?(@json_file)
-      @file_data = File.read(@json_file)
-    else
-      new_file = File.new(@json_file, 'w')
-      new_file.puts(JSON.pretty_generate([]))
-      new_file.close
-      @file_data = File.read(@json_file)
-    end
+    create_file unless File.file?(@json_file)
+    @file_data = File.read(@json_file)
   end
 
   def append_to_array

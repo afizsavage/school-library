@@ -4,6 +4,7 @@ require './rental'
 require './creator'
 require 'json'
 require './book_handler'
+require './people_handler'
 
 class App
   def initialize
@@ -84,29 +85,10 @@ class App
     end
   end
 
-  # def preserve_data
-  #   if File.file?('./books.json')
-  #     json = File.read('./books.json')
-  #   else
-  #     new_file = File.new('./books.json', 'w')
-  #     new_file.puts(JSON.pretty_generate([]))
-  #     new_file.close
-  #     json = File.read('./books.json')
-  #   end
-
-  #   second_json_array = JSON.parse(json)
-
-  #   @books.each do |book|
-  #     second_json_array << { title: book.title, author: book.author }
-  #   end
-
-  #   File.open('./books.json', 'w') do |f|
-  #     f.puts JSON.pretty_generate(second_json_array)
-  #   end
-  # end
-
   def save_data
-    book_hand = BookHandler.new('./books.json', @books)
-    book_hand.preserve_data
+    book_handler = BookHandler.new('./books.json', @books)
+    people_handler = PeopleHandler.new('./people.json', @people)
+    book_handler.preserve_data
+    people_handler.preserve_data
   end
 end
