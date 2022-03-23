@@ -5,6 +5,7 @@ require './creator'
 require 'json'
 require './book_handler'
 require './people_handler'
+require './rentals_dandler'
 
 class App
   def initialize
@@ -88,7 +89,9 @@ class App
   def save_data
     book_handler = BookHandler.new('./books.json', @books)
     people_handler = PeopleHandler.new('./people.json', @people)
+    rentals_handler = RentalsHandler.new('./rentals.json', @rentals)
     book_handler.preserve_data
     people_handler.preserve_data
+    rentals_handler.preserve_data
   end
 end
