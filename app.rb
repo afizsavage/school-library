@@ -2,12 +2,21 @@ require './teacher'
 require './book'
 require './rental'
 require './creator'
+require 'json'
+require './book_handler'
+require './people_handler'
+require './rentals_dandler'
 
 class App
   def initialize
     @books = []
+    @newly_created_books = []
     @people = []
+    @newly_created_people = []
     @rentals = []
+    @book_handler = BookHandler.new('./books.json', @newly_created_books)
+    @people_handler = PeopleHandler.new('./people.json', @newly_created_people)
+    @rentals_handler = RentalsHandler.new('./rentals.json', @rentals)
   end
 
   def list_all_books
@@ -28,11 +37,13 @@ class App
 
     case option
     when '1'
-      student = PersonCreator.new('student')
-      @people << student.create_person
+      student = PersonCreator.new('student').create_person
+      @newly_created_people << student
+      @people << student
     when '2'
-      teacher = PersonCreator.new('teacher')
-      @people << teacher.create_person
+      teacher = PersonCreator.new('teacher').create_person
+      @newly_created_people << teacher
+      @people << teacher
     else
       puts 'Wrong input!'
     end
@@ -45,7 +56,10 @@ class App
     print 'Author : '
     author = gets.chomp
 
-    @books << Book.new(title, author)
+    book = Book.new(title, author)
+
+    @newly_created_books << book
+    @books << book
     puts 'Book created sucessfully'
   end
 
@@ -80,5 +94,32 @@ class App
         puts "Date: #{rental.date}, Book: #{rental.book.title}, Person: #{rental.person.name}"
       end
     end
+  end
+
+  def load_books
+    @book_handler.files_to_load.each do |book|
+      @books << Book.new(book['title'], book['author'])
+    end
+  end
+
+  def load_people
+    @people_handler.files_to_load.each do |person|
+      @people << if person['class'] == 'Student'
+                   PersonCreator.new('student', person['age'], person['name']).create_person
+                 else
+                   PersonCreator.new('teacher', person['age'], person['name']).create_person
+                 end
+    end
+  end
+
+  def load_files_if_exists
+    load_books unless @book_handler.files_to_load.nil?
+    load_people unless @people_handler.files_to_load.nil?
+  end
+
+  def save_data
+    @book_handler.preserve_data
+    @people_handler.preserve_data
+    @rentals_handler.preserve_data
   end
 end

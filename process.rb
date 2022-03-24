@@ -3,6 +3,7 @@ require './app'
 class OptionProcesor
   def initialize
     @entry_point = App.new
+    @entry_point.load_files_if_exists
   end
 
   def process_option(user_input)
@@ -20,6 +21,7 @@ class OptionProcesor
     when '6'
       @entry_point.list_all_rentals
     when '7'
+      @entry_point.save_data
       exit
     else
       puts 'Wrong input! Enter a number 1 - 7.'

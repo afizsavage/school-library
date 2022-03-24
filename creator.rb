@@ -2,9 +2,9 @@ require './student'
 require './teacher'
 
 class PersonCreator
-  def initialize(type)
-    @age = nil
-    @name = nil
+  def initialize(type, age = nil, name = nil)
+    @age = age
+    @name = name
     @person = nil
     @type = type
   end
@@ -31,9 +31,26 @@ class PersonCreator
     end
   end
 
-  def create_person
+  def generate_details
+    @person = if @type == 'student'
+                Student.new(@age, @name, nil)
+              else
+                Teacher.new(@age, @name, nil)
+              end
+  end
+
+  def request_details
     receive_general_info
     receive_additional_info
+  end
+
+  def create_person
+    if @age.nil?
+      request_details
+    else
+      generate_details
+    end
+
     puts 'Person created successfully'
     @person
   end
