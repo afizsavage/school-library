@@ -12,9 +12,10 @@ class App
     @books = []
     @newly_created_books = []
     @people = []
+    @newly_created_people = []
     @rentals = []
     @book_handler = BookHandler.new('./books.json', @newly_created_books)
-    @people_handler = PeopleHandler.new('./people.json', @people)
+    @people_handler = PeopleHandler.new('./people.json', @newly_created_people)
     @rentals_handler = RentalsHandler.new('./rentals.json', @rentals)
   end
 
@@ -36,11 +37,13 @@ class App
 
     case option
     when '1'
-      student = PersonCreator.new('student')
-      @people << student.create_person
+      student = PersonCreator.new('student').create_person
+      @newly_created_people << student
+      @people << student
     when '2'
-      teacher = PersonCreator.new('teacher')
-      @people << teacher.create_person
+      teacher = PersonCreator.new('teacher').create_person
+      @newly_created_people << teacher
+      @people << teacher
     else
       puts 'Wrong input!'
     end
@@ -93,16 +96,25 @@ class App
     end
   end
 
-  def load_files
-    file_to_load = File.read('./books.json')
-    local_array = JSON.parse(file_to_load)
-    local_array.each do |book|
+  def load_books
+    @book_handler.files_to_load.each do |book|
       @books << Book.new(book['title'], book['author'])
     end
   end
 
+  def load_people
+    @people_handler.files_to_load.each do |person|
+      @people << if person['class'] == 'Student'
+                   PersonCreator.new('student', person['age'], person['name']).create_person
+                 else
+                   PersonCreator.new('teacher', person['age'], person['name']).create_person
+                 end
+    end
+  end
+
   def load_files_if_exists
-    load_files unless File.file?('./books.json') == false
+    load_books unless @book_handler.files_to_load.nil?
+    load_people unless @people_handler.files_to_load.nil?
   end
 
   def save_data
