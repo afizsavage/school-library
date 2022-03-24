@@ -10,8 +10,12 @@ require './rentals_dandler'
 class App
   def initialize
     @books = []
+    @newly_created_books = []
     @people = []
     @rentals = []
+    @book_handler = BookHandler.new('./books.json', @newly_created_books)
+    @people_handler = PeopleHandler.new('./people.json', @people)
+    @rentals_handler = RentalsHandler.new('./rentals.json', @rentals)
   end
 
   def list_all_books
@@ -49,7 +53,10 @@ class App
     print 'Author : '
     author = gets.chomp
 
-    @books << Book.new(title, author)
+    book = Book.new(title, author)
+
+    @newly_created_books << book
+    @books << book
     puts 'Book created sucessfully'
   end
 
@@ -86,12 +93,21 @@ class App
     end
   end
 
+  def load_files
+    file_to_load = File.read('./books.json')
+    local_array = JSON.parse(file_to_load)
+    local_array.each do |book|
+      @books << Book.new(book['title'], book['author'])
+    end
+  end
+
+  def load_files_if_exists
+    load_files unless File.file?('./books.json') == false
+  end
+
   def save_data
-    book_handler = BookHandler.new('./books.json', @books)
-    people_handler = PeopleHandler.new('./people.json', @people)
-    rentals_handler = RentalsHandler.new('./rentals.json', @rentals)
-    book_handler.preserve_data
-    people_handler.preserve_data
-    rentals_handler.preserve_data
+    @book_handler.preserve_data
+    @people_handler.preserve_data
+    @rentals_handler.preserve_data
   end
 end

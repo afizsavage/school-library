@@ -3,6 +3,7 @@ require './app'
 class OptionProcesor
   def initialize
     @entry_point = App.new
+    @entry_point.load_files_if_exists
   end
 
   def process_option(user_input)
