@@ -3,7 +3,7 @@ require_relative '../nameable'
 
 describe Person do
   context 'Test the Person class' do
-    person = Person.new(50, 'Blessed Jason Mwanza', parent_permission: true)
+    person = Person.new(50, 'Blessed Jason Mwanza', true)
 
     it 'has class Person' do
       expect(person.class) == Person
