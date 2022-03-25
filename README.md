@@ -12,6 +12,11 @@ A minimal OOP implemented school library.
 - Install [ruby](https://www.ruby-lang.org/en/documentation/installation/) if you don't have it installed already.
 - Type `ruby main.rb` in your terminal to run the program
 
+## How to run the program tests locally
+
+- Install Rspec: ```gem install rspec```
+- Run ```rspec __test__/name_of_file.rb``` 
+
 ## Author
 
 👤 **Afiz Savage**
